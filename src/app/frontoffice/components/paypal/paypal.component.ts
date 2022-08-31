@@ -16,6 +16,7 @@ export class PaypalComponent implements OnInit {
 
   ngOnInit(): void {
      
+    
   }
   addPay(myForm:NgForm){
     this.paypalService.creatOrder(myForm.value).subscribe(res=>{
