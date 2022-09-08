@@ -8,7 +8,7 @@ import { PaypalComponent } from './components/paypal/paypal.component';
 
 const routes: Routes = [
     {
-        path:"",component:FrontofficeComponent,
+        path:"",component:PaypalComponent,
         children:[
             {
                 path:'home',component:PaypalComponent

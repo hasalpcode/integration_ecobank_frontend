@@ -8,6 +8,15 @@ import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { FrontofficeModule } from './frontoffice/frontoffice.module';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
+
+const config: SocketIoConfig = {
+	url: environment.socketUrl, // socket server url;
+	options: {
+		transports: ['websocket']
+	}
+}
 
 @NgModule({
   declarations: [
@@ -20,6 +29,7 @@ import { FrontofficeModule } from './frontoffice/frontoffice.module';
     RouterModule,
     FormsModule,
     HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

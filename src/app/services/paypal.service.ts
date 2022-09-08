@@ -12,4 +12,12 @@ export class PaypalService {
   creatOrder(donnees:any){
     return this.http.post(apiUrl+"/order",donnees)
   }
+  capture(orderid:any){
+    return this.http.post(apiUrl+"/capture/"+orderid,null)
+  }
+
+  hook(){
+    return this.http.get(apiUrl+"/test")
+  }
+
 }
