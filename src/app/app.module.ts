@@ -10,6 +10,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FrontofficeModule } from './frontoffice/frontoffice.module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { SafePipe } from './frontoffice/safe.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 const config: SocketIoConfig = {
 	url: environment.socketUrl, // socket server url;
@@ -20,7 +23,9 @@ const config: SocketIoConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   
+    
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,8 @@ const config: SocketIoConfig = {
     RouterModule,
     FormsModule,
     HttpClientModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

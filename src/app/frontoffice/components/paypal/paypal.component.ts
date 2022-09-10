@@ -6,9 +6,16 @@ import { Router } from '@angular/router';
 import { apiUrl } from 'src/app/app.constant';
 import { PaypalService } from 'src/app/services/paypal.service';
 import { SocketService } from 'src/app/services/socket.service';
-import * as io from 'socket.io-client';
-import * as SocketIOClient from 'socket.io-client'
+
 import {ICreateOrderRequest, IPayPalConfig} from 'ngx-paypal';
+import { SafePipe } from '../../safe.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpComponent } from '../../pop-up/pop-up.component';
+import { io } from "socket.io-client"; 
+
+
+var socket = io('http://localhost:3333');
+
 
 @Component({
   selector: 'app-paypal',
@@ -18,25 +25,20 @@ import {ICreateOrderRequest, IPayPalConfig} from 'ngx-paypal';
 
 
 export class PaypalComponent implements OnInit  {
-  @Input()
-  url!:string
-  urlSafe!: SafeResourceUrl;
-  newMessage: string | undefined;
-  messageList: string[] = [];
-  approve:any
+  public safeSrc!: SafeResourceUrl; 
+  public approve:any
   liens:any
-
+  toast!:any
   id:any
   capture: any
-
+  message!: any
   public payPalConfig ?: IPayPalConfig;
-  
-  constructor(private paypalService:PaypalService,public sanitizer:DomSanitizer, public router:Router,private http:HttpClient,public socketService:SocketService) { 
+  o!:any
+  constructor(public dialogRef: MatDialog,private paypalService:PaypalService,public sanitizer:DomSanitizer, public router:Router,private http:HttpClient,public socketService:SocketService) { 
  ;
   }
-  transform(value: any, ...args: any[]) {
-    throw new Error('Method not implemented.');
-  }
+
+  
   
   
   addPay(myForm:NgForm){
@@ -45,7 +47,7 @@ export class PaypalComponent implements OnInit  {
       this.liens = (JSON.stringify(res))
       console.log(this.liens)
       this.approve = (JSON.parse(this.liens).links[1].href)
-      this.url = this.approve
+     
       console.log(this.approve)
     this.id = (JSON.parse(this.liens).id)
     console.log(this.id)
@@ -68,25 +70,63 @@ export class PaypalComponent implements OnInit  {
 
     
     
-   // window.open(this.approve)
-      this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.approve);
-     
-    })  
-    
-    
-
+  this.o =  window.open(this.approve,'popup','width=700,height=400,')
   
+
+
+    
+  })  
+    
+        
+    
    }
 
 
- 
+  //  openDialog(): void {
+  //   const dialogRef = this.dialogRef.open(PopUpComponent, {
+      
+  //     width: '250px',
+      
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     dialogRef.afterClosed().subscribe(res=>{
+  //       console.log('dialog closed')
+  //       console.log(res)
+  //     })
+  //   });
+  // }
+
+  
+
+  
+
 
 
 ngOnInit(): void {
  
+ // do {
+    
+  //} while (this.socketService.hook != 'APPROVED');
+   
+ this.socketService.notification()
+ 
+ //let i =  setInterval(()=>{
+   
+  // },1000)
+   
 
-  this.socketService.getsocket()
-  this.socketService.notification()
+  
+  
+  //this.notification()
+ 
+if (this.socketService.getsocket() ) {
+  //location.reload()
+ // this.socketService.notification()
+}
+
+//console.log(this.socketService.myfunction())
 }
 
 }
