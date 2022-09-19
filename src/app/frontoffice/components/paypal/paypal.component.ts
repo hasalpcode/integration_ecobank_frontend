@@ -12,6 +12,7 @@ import { SafePipe } from '../../safe.pipe';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { io } from "socket.io-client"; 
+import { ToastrService } from 'ngx-toastr';
 
 
 var socket = io('http://localhost:3333');
@@ -34,7 +35,7 @@ export class PaypalComponent implements OnInit  {
   message!: any
   public payPalConfig ?: IPayPalConfig;
   o!:any
-  constructor(public dialogRef: MatDialog,private paypalService:PaypalService,public sanitizer:DomSanitizer, public router:Router,private http:HttpClient,public socketService:SocketService) { 
+  constructor(public dialogRef: MatDialog,private paypalService:PaypalService,public sanitizer:DomSanitizer, public router:Router,private http:HttpClient,public socketService:SocketService,private toastr: ToastrService) { 
  ;
   }
 
@@ -109,6 +110,7 @@ ngOnInit(): void {
  // do {
     
   //} while (this.socketService.hook != 'APPROVED');
+
    
  this.socketService.notification()
  
