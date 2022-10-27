@@ -1,0 +1,10 @@
+body{height: 100vh;justify-content: center;align-items: center;display: flex;
+    background-image: url("../../../../assets/Ecobank.png");
+    background-repeat: no-repeat, repeat;
+    background-size: 600px;
+    background-position: center;
+    background-position-y: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}

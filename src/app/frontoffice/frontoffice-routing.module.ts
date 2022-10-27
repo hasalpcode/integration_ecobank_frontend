@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EcobankComponent } from './components/ecobank/ecobank.component';
 import { FrontofficeComponent } from './components/frontoffice/frontoffice.component';
-import { PaypalComponent } from './components/paypal/paypal.component';
 
 
 
 
 const routes: Routes = [
     {
-        path:"",component:PaypalComponent,
+        path:"",component:EcobankComponent,
         children:[
             {
-                path:'home',component:PaypalComponent
+                path:'home',component:EcobankComponent
             },
  
             {

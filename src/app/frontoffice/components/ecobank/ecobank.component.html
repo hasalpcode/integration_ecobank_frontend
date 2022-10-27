@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="select1">
+
+</div>
+    
+<div class="row">
+  <div class="col">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Card payment</button>
+  </div>
+  <div class="col">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ex" data-bs-whatever="@fat">Qr-code</button>
+  </div>
+  <div class="col">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#acc_balance" data-bs-whatever="@fat">Account balance</button>
+  </div>
+</div> 
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Informations</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addCardPayment(myForm)" #myForm="ngForm">
+            <div class="mb-3"> 
+                <label for="currency" class="col-form-label"><span>Currency</span>&nbsp; <i class="fa fa-money"></i></label>
+            
+                <select name="currency" id="currency" ngModel class="form-control">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                </select>  
+            </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Amount:</label>
+            <input type="number" class="form-control" id="recipient-name" name="amount" ngModel>
+          </div>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ex" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exLabel">Informations</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addQrPayment(myForm2)" #myForm2="ngForm">
+            <div class="mb-3"> 
+                <label for="currency" class="col-form-label"><span>Currency</span>&nbsp; <i class="fa fa-money"></i></label>
+            
+                <select name="currency2" id="currency" ngModel class="form-control">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                </select>  
+            </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Amount:</label>
+            <input type="number" class="form-control" id="recipient-name" name="amount2" ngModel>
+          </div>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#qr" data-bs-whatever="@fat">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div>
+  <div class="modal fade" id="qr" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true" onload="loading()">
+    <script>
+      function loading() {
+        document.getElementById('qr').innerHTML='<div class="spinner-grow" role="status"><span class="visually-hidden">Loading...</span></div>'
+      }
+    </script>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exLabel"><h2>Scannez le Qr-code</h2></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="margin:auto">
+          <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<div class="modal fade" id="acc_balance" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Informations Account Balance</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="viewAccountBalance(myForm3)" #myForm3="ngForm">
+          <div class="mb-3"> 
+            <label for="clienid" class="col-form-label"><span>Client Id:</span>&nbsp; <i class="bi bi-person-circle"></i></label>
+        
+            <input type="text" class="form-control" id="clienid" name="client_id" ngModel>
+          </div>
+            <div class="mb-3"> 
+                <label for="affcode" class="col-form-label"><span>Affiliate code:</span>&nbsp; <i class="bi bi-key-fill"></i></label>
+            
+                <input type="text" class="form-control" id="affcode" name="affiliateCode" ngModel>
+            </div>
+            
+            <div class="mb-3"> 
+              <label for="noAcc" class="col-form-label"><span>Account Number:</span>&nbsp; <i class="bi bi-shield-fill-check"></i></label>
+          
+              <input type="text" class="form-control" id="noAcc" name="accountNo" ngModel>
+            </div>
+          <div class="mb-3">
+            <label for="cname" class="col-form-label">Company name:&nbsp;&nbsp; <i class="bi bi-building"></i></label>
+            <input type="text" class="form-control" id="cname" name="companyName" ngModel>
+          </div>
+        <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#infoAccount" data-bs-whatever="@fat">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="modal fade" id="infoAccount" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exLabel"><h2>Account balance</h2></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="margin:auto">
+          <table class="table table-striped ">
+            <thead>
+              <tr><th>Object</th><th>Value</th></tr>
+            </thead>
+            <tbody *ngFor="let data of acountInfos" >
+              <tr >
+                <td>Account Name</td><td>{{ data.accountName }}</td>
+              </tr>
+              <tr >
+                <td>Account Number</td><td>{{ data.accountNo }}</td>
+              </tr>
+              <tr >
+                <td>Current Balance</td><td><b>{{ data.currentBalance }}</b> {{data.ccy}}</td>
+              </tr>
+              <tr >
+                <td>Account Status</td><td>{{ data.accountStatus }}</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+</body>
+</html>

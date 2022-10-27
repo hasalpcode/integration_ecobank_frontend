@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PaypalComponent } from './components/paypal/paypal.component';
 import { FrontofficeComponent } from './components/frontoffice/frontoffice.component';
 import { FrontofficeRoutingModule } from './frontoffice-routing.module';
 import { FormsModule } from '@angular/forms';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { SafePipe } from './safe.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PopUpComponent } from './pop-up/pop-up.component';
+
 import { ToastrModule } from 'ngx-toastr';
+import { EcobankComponent } from './components/ecobank/ecobank.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
  
   declarations: [
-    PaypalComponent,
+    
     FrontofficeComponent,
-    SafePipe ,
-    PopUpComponent,
+    SafePipe,
+    EcobankComponent ,
+
   
   ],
   imports: [
@@ -25,7 +27,8 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     NgxPayPalModule,
      MatDialogModule,
-     ToastrModule.forRoot()
+     ToastrModule.forRoot(),
+     QRCodeModule
   ]
 })
 export class FrontofficeModule { }
