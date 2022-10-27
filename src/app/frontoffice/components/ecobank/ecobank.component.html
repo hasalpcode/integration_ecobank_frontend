@@ -94,17 +94,15 @@
 
 
 <div>
-  <div class="modal fade" id="qr" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true" onload="loading()">
-    <script>
-      function loading() {
-        document.getElementById('qr').innerHTML='<div class="spinner-grow" role="status"><span class="visually-hidden">Loading...</span></div>'
-      }
-    </script>
+  <div class="modal fade" id="qr" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true" >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exLabel"><h2>Scannez le Qr-code</h2></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="spinner-border" role="status" *ngIf="myAngularxQrCode == '' " style="margin:auto">
+          <span class="visually-hidden">Loading...</span>
         </div>
         <div class="modal-body" style="margin:auto">
           <qrcode [qrdata]="myAngularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
@@ -170,8 +168,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" style="margin:auto">
+          <div class="spinner-border" role="status" *ngIf="acountInfos.length == 0" style="margin:auto">
+            <span class="visually-hidden">Loading...</span>
+          </div>
           <table class="table table-striped ">
-            <thead>
+            <thead *ngIf="acountInfos.length != 0" >
               <tr><th>Object</th><th>Value</th></tr>
             </thead>
             <tbody *ngFor="let data of acountInfos" >
