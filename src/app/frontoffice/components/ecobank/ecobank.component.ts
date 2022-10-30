@@ -17,6 +17,9 @@ export class EcobankComponent implements OnInit {
 
   public myAngularxQrCode = '';
   public acountInfos:any =[] ;
+  public acountEnquiry:any =[] ;
+  public acountStatement:any   ;
+
 
   constructor(private ecobankService:EcobankService ) {
     this.myAngularxQrCode = ''
@@ -41,9 +44,6 @@ export class EcobankComponent implements OnInit {
     console.log(JSON.parse(JSON.stringify(res)).response_content.dynamicQR)
     const url_qr = JSON.parse(JSON.stringify(res)).response_content.dynamicQR
     this.myAngularxQrCode =   url_qr
-      // this.redirect_url = JSON.parse(JSON.stringify(res)).response_content
-      // console.log(this.redirect_url);
-      // window.open(this.redirect_url,'popup','width=1000,height=500,margin=auto,align-items=center')
 
     });
   }
@@ -57,9 +57,32 @@ export class EcobankComponent implements OnInit {
       this.acountInfos.push(data);
 
       console.log(this.acountInfos.availableBalance);
-      // this.redirect_url = JSON.parse(JSON.stringify(res)).response_content
-      // console.log(this.redirect_url);
-      // window.open(this.redirect_url,'popup','width=1000,height=500,margin=auto,align-items=center')
+
+    });
+    
+  }
+
+  // account enquiry
+
+  viewAccountEnquiry(myForm4:NgForm){
+    this.ecobankService.AccountEnquiry(myForm4.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content ;
+      console.log(data);
+      this.acountEnquiry.push(data);
+
+    });
+    
+  }
+  // account statement
+
+  viewAccountStatement(myForm5:NgForm){
+    this.ecobankService.AccountStatement(myForm5.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content ;
+      console.log(data);
+      this.acountStatement += data;
+      console.log(this.acountStatement)
 
     });
     

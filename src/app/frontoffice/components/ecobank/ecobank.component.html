@@ -22,6 +22,17 @@
   <div class="col">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#acc_balance" data-bs-whatever="@fat">Account balance</button>
   </div>
+  <div class="col">
+    <div class="dropdown ">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+        More
+      </button>
+      <ul class="dropdown-menu bg-primary" aria-labelledby="dropdownMenu2">
+        <li><button class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#acc_enquiry" data-bs-whatever="@fat">Get account enquiry</button></li>
+        <li><button class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#acc_statement" data-bs-whatever="@fat">Statement generation</button></li>
+      </ul>
+    </div>
+  </div>
 </div> 
 
 
@@ -190,8 +201,157 @@
               </tr>
             </tbody>
           </table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<div class="modal fade" id="acc_enquiry" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Account Informations</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="viewAccountEnquiry(myForm4)" #myForm4="ngForm">
+          <div class="mb-3"> 
+            <label for="clienid" class="col-form-label"><span>Client Id:</span>&nbsp; <i class="bi bi-person-circle"></i></label>
+        
+            <input type="text" class="form-control" id="clienid" name="client_id" ngModel>
+          </div>
+          <div class="mb-3"> 
+            <label for="noAcc" class="col-form-label"><span>Account Number:</span>&nbsp; <i class="bi bi-shield-fill-check"></i></label>
+        
+            <input type="text" class="form-control" id="noAcc" name="accountNo" ngModel>
+          </div>
+          <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#AccountEnquiryInfos" data-bs-whatever="@fat">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="modal fade" id="AccountEnquiryInfos" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exLabel"><h2>Account Enquiry Informations</h2></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="margin:auto">
+          <div class="spinner-border" role="status" *ngIf="acountEnquiry.length == 0" style="margin:auto">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <table class="table table-striped ">
+            <thead *ngIf="acountEnquiry.length != 0" >
+              <tr><th>Object</th><th>Value</th></tr>
+            </thead>
+            <tbody *ngFor="let data of acountEnquiry" >
+              <tr >
+                <td>Account Name</td><td>{{ data.accountName }}</td>
+              </tr>
+              <tr >
+                <td>Account Number</td><td>{{ data.accountNo }}</td>
+              </tr>
+              <tr >
+                <td>Currency</td><td> {{data.ccy}}</td>
+              </tr>
+              <tr >
+                <td>Account Status</td><td>{{ data.accountStatus }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<div class="modal fade" id="acc_statement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Account statement generation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="viewAccountStatement(myForm5)" #myForm5="ngForm">
+          <div class="mb-3"> 
+            <label for="clienid" class="col-form-label"><span>Corporate Id:</span>&nbsp; <i class="bi bi-person-circle"></i></label>
+        
+            <input type="text" class="form-control" id="clienid" name="corporateId" ngModel>
+          </div>
+          <div class="mb-3"> 
+            <label for="noAcc" class="col-form-label"><span>Account Number:</span>&nbsp; <i class="bi bi-shield-fill-check"></i></label>
+            <input type="text" class="form-control" id="noAcc" name="accountNo" ngModel>
+          </div>
+          <div class="mb-3"> 
+            <label for="sd" class="col-form-label"><span>Start date:</span>&nbsp; <i class="bi bi-shield-fill-check"></i></label>
+            <input type="date" class="form-control" id="sd" name="startDate" ngModel>
+          </div>
+          <div class="mb-3"> 
+            <label for="ed" class="col-form-label"><span>End date:</span>&nbsp; <i class="bi bi-shield-fill-check"></i></label>
+            <input type="date" class="form-control" id="ed" name="endDate" ngModel>
+          </div>
+          <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#AccountStatementInfos" data-bs-whatever="@fat">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <div class="modal fade" id="AccountStatementInfos" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exLabel"><h2>Account statement Informations</h2></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="margin:auto">
+          <div class="spinner-border" role="status" *ngIf="acountStatement != ''" style="margin:auto">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <table class="table table-striped ">
+            <thead *ngIf="acountStatement != '' " >
+              <tr><th>Object</th><th>Value</th></tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let data of acountStatement" >
+                <td>Currency</td><td> {{data.ccy}}</td><br>
+                <td>Amount</td><td> {{data.lcyamount1}}</td><br>
+                <td>TransfRefno</td><td>{{ data.trnrefno }}</td><br>
+                <td>Date </td><td>{{ data.valuedate }}</td><br>
+                <td>Narrative</td><td>{{ data.narrative }}</td>
+              </tr>
+            </tbody>
+          </table>
 
         </div>
         <div class="modal-footer">

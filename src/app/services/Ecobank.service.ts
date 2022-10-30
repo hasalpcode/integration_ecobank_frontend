@@ -12,19 +12,21 @@ export class EcobankService {
   cardPayment(donnees:any){
     return this.http.post(apiUrl+"/card",donnees)
   }
-  // capture(orderid:any){
-  //   return this.http.post(apiUrl+"/capture/"+orderid,null)
-  // }
 
-  // hook(){
-  //   return this.http.get(apiUrl+"/test")
-  // }
   QrPayment(donnees:any){
     return this.http.post(apiUrl+"/qr_payment",donnees)
   }
 
   AccountBalance(donnees:any){
     return this.http.post(apiUrl+"/account_balance",donnees)
+  }
+
+  AccountEnquiry(donnees:any){
+    return this.http.post(apiUrl+"/account_enquiry",donnees)
+  }
+
+  AccountStatement(donnees:any){
+    return this.http.post(apiUrl+"/account_statement",donnees)
   }
 
 }
