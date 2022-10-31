@@ -326,29 +326,30 @@
 
 
 <div>
-  <div class="modal fade" id="AccountStatementInfos" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true">
+  <div class="modal fade" id="AccountStatementInfos" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true" >
 
-    <div class="modal-dialog">
-      <div class="modal-content">
+    <div class="modal-dialog modal-lg text-nowrap">
+      <div class="modal-content ">
         <div class="modal-header">
           <h5 class="modal-title" id="exLabel"><h2>Account statement Informations</h2></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" style="margin:auto">
-          <div class="spinner-border" role="status" *ngIf="acountStatement != ''" style="margin:auto">
+          <div class="spinner-border" role="status" *ngIf="acountStatement.length == 0 " style="margin:auto">
             <span class="visually-hidden">Loading...</span>
           </div>
           <table class="table table-striped ">
-            <thead *ngIf="acountStatement != '' " >
-              <tr><th>Object</th><th>Value</th></tr>
+            <thead *ngIf="acountStatement.length > 0 " >
+              <tr><th>#</th><th>Ref.Transfert</th><th>Date</th><th>Amount</th><th>Currency</th><th>Narrative</th></tr>
             </thead>
             <tbody >
-              <tr *ngFor="let data of acountStatement" >
-                <td>Currency</td><td> {{data.ccy}}</td><br>
-                <td>Amount</td><td> {{data.lcyamount1}}</td><br>
-                <td>TransfRefno</td><td>{{ data.trnrefno }}</td><br>
-                <td>Date </td><td>{{ data.valuedate }}</td><br>
-                <td>Narrative</td><td>{{ data.narrative }}</td>
+              <tr *ngFor="let data of acountStatement"  > 
+                <td>{{acountStatement.indexOf(data)+ 1}}</td>               
+                <td>{{ data.trnrefno }}</td>
+                <td>{{ data.valuedate }}</td>
+                <td> {{data.lcyamount1}}</td>
+                <td> {{data.acccy}}</td>
+                <td class="text-wrap">{{ data.narrative }}</td>
               </tr>
             </tbody>
           </table>

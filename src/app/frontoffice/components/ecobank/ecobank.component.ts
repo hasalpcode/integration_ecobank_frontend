@@ -18,7 +18,7 @@ export class EcobankComponent implements OnInit {
   public myAngularxQrCode = '';
   public acountInfos:any =[] ;
   public acountEnquiry:any =[] ;
-  public acountStatement:any   ;
+  public acountStatement:any=[] ;
 
 
   constructor(private ecobankService:EcobankService ) {
@@ -81,7 +81,7 @@ export class EcobankComponent implements OnInit {
       console.log(res)
       let data:any = JSON.parse(JSON.stringify(res)).response_content ;
       console.log(data);
-      this.acountStatement += data;
+      this.acountStatement=data;
       console.log(this.acountStatement)
 
     });
