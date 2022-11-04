@@ -19,6 +19,7 @@ export class EcobankComponent implements OnInit {
   public acountInfos:any =[] ;
   public acountEnquiry:any =[] ;
   public acountStatement:any=[] ;
+  public billerState!:string
 
 
   constructor(private ecobankService:EcobankService ) {
@@ -83,6 +84,20 @@ export class EcobankComponent implements OnInit {
       console.log(data);
       this.acountStatement=data;
       console.log(this.acountStatement)
+
+    });
+    
+  }
+
+   // account statement
+
+   BillPayment(myForm6:NgForm){
+    this.ecobankService.BillPayment(myForm6.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content ;
+      console.log(data);
+      this.billerState=data;
+      
 
     });
     

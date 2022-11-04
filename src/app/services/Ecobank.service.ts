@@ -29,4 +29,8 @@ export class EcobankService {
     return this.http.post(apiUrl+"/account_statement",donnees)
   }
 
+  BillPayment(donnees:any){
+    return this.http.post(apiUrl+"/billpayment",donnees)
+  }
+
 }
