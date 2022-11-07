@@ -19,7 +19,12 @@ export class EcobankComponent implements OnInit {
   public acountInfos:any =[] ;
   public acountEnquiry:any =[] ;
   public acountStatement:any=[] ;
-  public billerState!:string
+  public billerState:string = "";
+  public interbankState:string = "";
+  public domesticState:string = "";
+  public jetonState:string = "";
+  public momoState:string = "";
+  public transactionRef_momo = "";
 
 
   constructor(private ecobankService:EcobankService ) {
@@ -89,15 +94,68 @@ export class EcobankComponent implements OnInit {
     
   }
 
-   // account statement
+   // bill payment
 
-   BillPayment(myForm6:NgForm){
+  BillPayment(myForm6:NgForm){
     this.ecobankService.BillPayment(myForm6.value).subscribe(res=>{
       console.log(res)
       let data:any = JSON.parse(JSON.stringify(res)).response_content ;
       console.log(data);
       this.billerState=data;
       
+
+    });
+    
+  }
+  // interbank payment
+
+  InterbankPayment(myForm7:NgForm){
+    this.ecobankService.InterbankPayment(myForm7.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content ;
+      console.log(data);
+      this.interbankState=data;
+      
+
+    });
+    
+  }
+  // domestic payment
+
+  DomesticPayment(myForm8:NgForm){
+    this.ecobankService.DomesticPayment(myForm8.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content ;
+      console.log(data);
+      this.domesticState=data;
+      
+
+    });
+    
+  }
+
+  // jeton payment
+
+  JetonPayment(myForm9:NgForm){
+    this.ecobankService.JetonPayment(myForm9.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content ;
+      console.log(data);
+      this.jetonState=data;
+      
+
+    });
+    
+  }
+   // momo payment
+
+   MomoPayment(myForm10:NgForm){
+    this.ecobankService.MomoPayment(myForm10.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content ;
+      console.log(data);
+      this.momoState=data.responseMessage;
+      this.transactionRef_momo = data.transactionRef;
 
     });
     
