@@ -19,12 +19,14 @@ export class EcobankComponent implements OnInit {
   public acountInfos:any =[] ;
   public acountEnquiry:any =[] ;
   public acountStatement:any=[] ;
+  public billerListeState:any=[] ;
   public billerState:string = "";
   public interbankState:string = "";
   public domesticState:string = "";
   public jetonState:string = "";
   public momoState:string = "";
   public transactionRef_momo = "";
+  public getBillerCode!:number;
 
 
   constructor(private ecobankService:EcobankService ) {
@@ -94,6 +96,7 @@ export class EcobankComponent implements OnInit {
     
   }
 
+
    // bill payment
 
   BillPayment(myForm6:NgForm){
@@ -160,6 +163,22 @@ export class EcobankComponent implements OnInit {
     });
     
   }
+
+  // biller list
+
+  GetBillerList(myForm11:NgForm){
+    this.ecobankService.GetBillerList(myForm11.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content.billerInfo ;
+      console.log(data);
+      this.billerListeState=data;
+      this.getBillerCode=data;
+      console.log(this.getBillerCode)
+      
+    });
+    
+  }
+
   
 
   ngOnInit(): void {

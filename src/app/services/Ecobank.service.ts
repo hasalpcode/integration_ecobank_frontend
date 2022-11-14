@@ -49,4 +49,8 @@ export class EcobankService {
     return this.http.post(apiUrl+"/momopayment",donnees)
   }
 
+  GetBillerList(donnees:any){
+    return this.http.post(apiUrl+"/getbillerlist",donnees)
+  }
+
 }

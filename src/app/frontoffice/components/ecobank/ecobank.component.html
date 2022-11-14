@@ -376,9 +376,12 @@
       </div>
       <div class="modal-body">
         <div class="row">
-           <div class="col">
+          <!-- <div class="col">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bpayment" data-bs-whatever="@fat" data-bs-dismiss="modal">Bills payment</button>
-          </div>
+          </div> -->
+          <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bList" data-bs-whatever="@fat" data-bs-dismiss="modal">Bills payment</button>
+            </div>
           <div class="col">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ibpayment" data-bs-whatever="@fat" data-bs-dismiss="modal">InterBank payment</button>
           </div>
@@ -406,9 +409,85 @@
   </div>
 </div>
 
+<!--biller list-->
+<div class="modal fade" id="bList" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Biller List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="GetBillerList(myForm11)" #myForm11="ngForm">
+          <fieldset class="border p-2" >
+            <legend class="float-none w-auto p-2 text-on-pannel text-primary"><h5>your affiliate code</h5></legend>
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" id="ln" name="affiliateCode" placeholder="affiliateCode" ngModel>
+              </div>
+            </div> <br>
+          </fieldset>
+          
+          <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#billerliststate" data-bs-whatever="@fat">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!--biller list state-->
+<div>
+  <div class="modal fade" id="billerliststate" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true" >
+
+    <div class="modal-dialog modal-lg text-nowrap">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exLabel"><h2>Biller List</h2></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="margin:auto">
+          <div class="spinner-border" role="status" *ngIf="billerListeState.length == 0 " style="margin:auto">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <button class="btn btn-dark" style="margin-left: 100%;" data-bs-toggle="modal" data-bs-target="#bpayment" data-bs-whatever="@fat" data-bs-dismiss="modal">payment
+            <span data-bs-toggle="modal" data-bs-target="#bpayment" data-bs-whatever="@fat" data-bs-dismiss="modal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#4682b4" id="submit" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+              <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+              </svg></span>
+          </button><br>
+          <table class="table table-striped ">
+            <thead *ngIf="billerListeState.length > 0 " >
+              <tr><th>#</th><th>billerCode</th><th>billerName</th><th>billerCategory</th><th>billerID</th></tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let data of billerListeState"  > 
+                <td>{{billerListeState.indexOf(data)+ 1}}</td>               
+                <td>{{ data.billerCode }}</td>
+                <td>{{ data.billerName }}</td>
+                <td> {{data.billerCategory}}</td>
+                <td> {{data.billerID}}</td>
+                
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
 <!--bills payments-->
 <div class="modal fade" id="bpayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg  modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Bills Payment</h5>
@@ -440,7 +519,11 @@
             <legend class="float-none w-auto p-2 text-on-pannel text-primary"><h5>Bill infos</h5></legend>
             <div class="row">
               <div class="col">
-                <input type="text" class="form-control" id="ln" name="billercode" placeholder="billercode" ngModel>
+                <select name="billercode"  ngModel class="form-select" aria-label="Default select example">
+                  <option value="">-- billerCode --</option>
+                  <option value="{{ data.billerCode }}" *ngFor="let data of billerListeState" >{{ data.billerName }}</option>
+                 
+                </select>  
               </div>
               <div class="col">
                 <input type="text" class="form-control" id="fn" name="billRefNo" placeholder="billRefNo" ngModel>
@@ -461,7 +544,7 @@
               <div class="col"> 
             
                 <select name="currency"  ngModel class="form-select" aria-label="Default select example">
-                
+                <option value="">-- currency --</option>
                 <option value="EUR">EUR</option>
                 <option value="USD">USD</option>
                 </select>  
@@ -497,7 +580,7 @@
             <span class="visually-hidden">Loading...</span>
           </div>
           <div *ngIf="billerState == 'Request received successfully' " >
-            <svg xmlns="http://www.w3.org/2000/svg" width="116" height="116" fill="currentColor" class="bi bi-check-square-fill bg-success" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="116" height="116" fill="#1fa055" class="bi bi-check-square-fill " viewBox="0 0 16 16">
               <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
             </svg>
           </div>
@@ -516,7 +599,7 @@
 
 <!--interbank payments-->
 <div class="modal fade" id="ibpayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg  modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">InterBank Payment</h5>
@@ -601,7 +684,7 @@
             <span class="visually-hidden">Loading...</span>
           </div>
           <div *ngIf="interbankState == 'Request received successfully' " >
-            <svg xmlns="http://www.w3.org/2000/svg" width="116" height="116" fill="currentColor" class="bi bi-check-square-fill bg-success" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="116" height="116" fill="#1fa055" class="bi bi-check-square-fill " viewBox="0 0 16 16">
               <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
             </svg>
           </div>
@@ -620,7 +703,7 @@
 
 <!--domestic payments-->
 <div class="modal fade" id="domesticpayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg  modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Domestic Payment</h5>
@@ -685,7 +768,7 @@
 <div>
   <div class="modal fade" id="domesticpaymentstate" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exLabel"><h2>Domestic Payment State</h2></h5>
@@ -696,7 +779,7 @@
             <span class="visually-hidden">Loading...</span>
           </div>
           <div *ngIf="domesticState == 'Request received successfully' " >
-            <svg xmlns="http://www.w3.org/2000/svg" width="116" height="116" fill="currentColor" class="bi bi-check-square-fill bg-success" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="116" height="116" fill="#1fa055" class="bi bi-check-square-fill " viewBox="0 0 16 16">
               <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
             </svg>
           </div>
@@ -715,7 +798,7 @@
 
 <!--jeton payments-->
 <div class="modal fade" id="jetonpayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Jeton Payment</h5>
@@ -758,8 +841,6 @@
                 </select>  
               </div>
             </div>
-
-            
           </fieldset>
           <fieldset class="border p-2" >
             <legend class="float-none w-auto p-2 text-on-pannel text-primary"><h5>beneficiary </h5></legend>
@@ -788,7 +869,7 @@
 <div>
   <div class="modal fade" id="jetonpaymentstate" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exLabel"><h2>Jeton Payment State</h2></h5>
@@ -818,7 +899,7 @@
 
 <!--MOMO payments-->
 <div class="modal fade" id="momo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg ">
+  <div class="modal-dialog modal-lg  modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Mobile Money Payment</h5>
