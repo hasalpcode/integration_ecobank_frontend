@@ -50,7 +50,7 @@ export class EcobankService {
   }
 
   GetBillerList(donnees:any){
-    return this.http.post(apiUrl+"/getbillerlist",donnees)
+    return this.http.post(`${apiUrl}/getbillerlist`,donnees)
   }
 
 }

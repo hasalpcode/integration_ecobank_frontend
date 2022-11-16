@@ -51,15 +51,14 @@ export class EcobankComponent implements OnInit {
       
     console.log(JSON.parse(JSON.stringify(res)).response_content.dynamicQR)
     const url_qr = JSON.parse(JSON.stringify(res)).response_content.dynamicQR
-    this.myAngularxQrCode =   url_qr
-
+    this.myAngularxQrCode =   url_qr;
     });
   }
   // account balance
 
   viewAccountBalance(myForm3:NgForm){
     this.ecobankService.AccountBalance(myForm3.value).subscribe(res=>{
-      console.log(res)
+      console.log(res);
       let data:any = JSON.parse(JSON.stringify(res)).response_content ;
       console.log(data);
       this.acountInfos.push(data);
@@ -96,7 +95,6 @@ export class EcobankComponent implements OnInit {
     
   }
 
-
    // bill payment
 
   BillPayment(myForm6:NgForm){
@@ -105,10 +103,8 @@ export class EcobankComponent implements OnInit {
       let data:any = JSON.parse(JSON.stringify(res)).response_content ;
       console.log(data);
       this.billerState=data;
-      
-
     });
-    
+     
   }
   // interbank payment
 
@@ -118,6 +114,7 @@ export class EcobankComponent implements OnInit {
       let data:any = JSON.parse(JSON.stringify(res)).response_content ;
       console.log(data);
       this.interbankState=data;
+
       
 
     });
@@ -163,7 +160,6 @@ export class EcobankComponent implements OnInit {
     });
     
   }
-
   // biller list
 
   GetBillerList(myForm11:NgForm){
@@ -178,9 +174,6 @@ export class EcobankComponent implements OnInit {
     });
     
   }
-
-  
-
   ngOnInit(): void {
   }
 
