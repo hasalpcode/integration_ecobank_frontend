@@ -53,4 +53,8 @@ export class EcobankService {
     return this.http.post(`${apiUrl}/getbillerlist`,donnees)
   }
 
+  XpressOpening(donnees:any){
+    return this.http.post(`${apiUrl}/xpress_opening`,donnees)
+  }
+
 }

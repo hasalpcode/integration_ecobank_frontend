@@ -30,6 +30,7 @@
       <ul class="dropdown-menu bg-primary" aria-labelledby="dropdownMenu2">
         <li><button class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#acc_enquiry" data-bs-whatever="@fat">Get account enquiry</button></li>
         <li><button class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#acc_statement" data-bs-whatever="@fat">Statement generation</button></li>
+        <li><button class="dropdown-item" type="button"  data-bs-toggle="modal" data-bs-target="#xpress_account" data-bs-whatever="@fat">Xpress account</button></li>
       </ul>
     </div>
   </div>
@@ -303,7 +304,7 @@
           </div>
           <div class="mb-3"> 
             <label for="noAcc" class="col-form-label"><span>Account Number:</span>&nbsp; <i class="bi bi-shield-fill-check"></i></label>
-            <input type="text" class="form-control" id="noAcc" name="accountNo" ngModel>
+            <input type="text" class="form-control" id="noAcc" name="accountNumber" ngModel>
           </div>
           <div class="mb-3"> 
             <label for="sd" class="col-form-label"><span>Start date:</span>&nbsp; <i class="bi bi-shield-fill-check"></i></label>
@@ -909,9 +910,7 @@
         <form (ngSubmit)="MomoPayment(myForm10)" #myForm10="ngForm">
           <fieldset class="border " >
             <legend class="float-none w-auto p-2 text-on-pannel text-primary"><h5>sender infos</h5></legend>
-            <!-- <div class="col-sm-3">
-              <input type="text" class="form-control " id="fn" name="countryCode" placeholder="countryCode" ngModel>
-            </div><br> -->
+
             <div class="row">
               <div class="col">
                 <input type="text" class="form-control" id="ln" name="sendername" placeholder="sender name" ngModel>
@@ -1007,5 +1006,128 @@
   
 </div>
 
+<!-- xpress account opening -->
+<div class="modal fade" id="xpress_account" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg  modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xpress account opening</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="OpeningXpress(myForm12)" #myForm12="ngForm">
+          <fieldset class="border " >
+            <legend class="float-none w-auto p-2 text-on-pannel text-primary"><h5>identity</h5></legend>
+
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" id="ln" name="firstname" placeholder="first name" ngModel>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" id="fn" name="lastname" placeholder="last name" ngModel>
+              </div>
+            </div> <br>
+
+            <div class="row">
+              <div class="col">
+                <select name="gender"  ngModel class="form-select" aria-label="Default select example">
+                  <option value="">-- Gender --</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                  </select>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" id="ln" name="affiliateCode" placeholder="affiliateCode" ngModel>
+              </div>
+              
+            </div>
+          </fieldset>
+          <fieldset class="border " >
+            <legend class="float-none w-auto p-2 text-on-pannel text-primary"><h5>more</h5></legend>
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" id="ln" name="phone" placeholder="mobileNo" ngModel>
+              </div>
+              <div class="col">
+                <input type="email" class="form-control" id="fn" name="email" placeholder="email" ngModel>
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" id="ln" name="identityNo" placeholder="identityNo" ngModel>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" id="fn" name="identityType" placeholder="identityType" ngModel>
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" id="fn" name="IDIssueDate" placeholder="IDIssueDate" ngModel>
+              </div>
+              <div class="col"> 
+                <input type="text" class="form-control" name="IDExpiryDate" placeholder="IDExpiryDate">
+
+              </div> 
+            </div> <br>
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" id="ln" name="ccy" placeholder="ccy" ngModel>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" id="fn" name="country" placeholder="country" ngModel>
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col">
+                <input type="text" class="form-control" id="ln" name="countryOfResidence" placeholder="countryOfResidence" ngModel>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" id="fn" name="city" placeholder="city" ngModel>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" id="fn" name="street" placeholder="street" ngModel>
+              </div>
+            </div><br>
+          </fieldset>
+          <button type="submit" class="btn btn-primary"  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#openingstate" data-bs-whatever="@fat">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--opening xpress state-->
+<div>
+  <div class="modal fade" id="openingstate" tabindex="-1" aria-labelledby="exLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exLabel"><h2>Xpress account opening State</h2></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" style="margin:auto">
+          <div class="spinner-border" role="status" *ngIf="xpress_openingState == '' " style="margin:auto">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div *ngIf="xpress_openingState == 'success' " >
+            <svg xmlns="http://www.w3.org/2000/svg" width="116" height="116" fill="#1fa055" class="bi bi-check-square-fill " viewBox="0 0 16 16">
+              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
+            </svg> <br><br>
+            <h4>Account No: {{xpress_accountNo}}</h4>
+            <h4>Customer Id: {{xpress_customerId}}</h4>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
 </body>
 </html>

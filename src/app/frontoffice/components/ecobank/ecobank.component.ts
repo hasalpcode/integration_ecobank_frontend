@@ -27,6 +27,9 @@ export class EcobankComponent implements OnInit {
   public momoState:string = "";
   public transactionRef_momo = "";
   public getBillerCode!:number;
+  public xpress_openingState:string = "";
+  public xpress_accountNo!:number;
+  public xpress_customerId!:number;
 
 
   constructor(private ecobankService:EcobankService ) {
@@ -170,6 +173,21 @@ export class EcobankComponent implements OnInit {
       this.billerListeState=data;
       this.getBillerCode=data;
       console.log(this.getBillerCode)
+      
+    });
+    
+  }
+   // xpress account opening 
+
+  OpeningXpress(myForm12:NgForm){
+    this.ecobankService.XpressOpening(myForm12.value).subscribe(res=>{
+      console.log(res)
+      let data:any = JSON.parse(JSON.stringify(res)).response_content ;
+      this.xpress_accountNo = data.accountNo;
+      this.xpress_customerId = data.customerID;
+      console.log(data);
+      this.xpress_openingState=JSON.parse(JSON.stringify(res)).response_message;
+      console.log(this.xpress_openingState,this.xpress_accountNo,this.xpress_customerId)
       
     });
     
